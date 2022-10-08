@@ -6,7 +6,7 @@ const NotificationWindow = () => {
         <p>2</p>
       </div>
       <div className="notification-content-details">
-        <p>No New Notifications</p>
+        <p>Ahmed Raza Has Joined #General</p>
       </div>
     </div>
   );

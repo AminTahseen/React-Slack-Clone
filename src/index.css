@@ -623,3 +623,72 @@ p {
   color: white;
   font-size: 16px;
 }
+/*add members dialog*/
+.add-members{
+  display: flex;
+  flex-direction: column;
+  width:600px;
+}
+.add-members-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(211, 211, 211);
+
+}
+.add-members-header>button{
+  border: 0px;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: white;
+}
+.add-members-content{
+  height: 250px;
+  margin-top: 10px;
+  overflow: auto;
+  border-bottom:1px solid rgb(176, 176, 176);
+  padding-bottom: 20px;
+}
+.member-list-item{
+  display: flex;
+  align-items: center;
+  border: 1px solid gainsboro;
+  padding: 10px;
+  border-radius: 10px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.member-list-item-member-details{
+  display: flex;
+  align-items: center;
+
+}
+.member-list-item-member-details>img{
+  border-radius: 10px;
+}
+.member-list-item-member-details>p{
+  font-size: 20px;
+  margin-left: 10px;
+  font-weight:400;
+}
+.member-list-item-member-details >.remove{
+  color: var(--slack-red);
+  font-weight: bold;
+}
+.member-list-item>button{
+  border: 0px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.member-list-item>.remove{
+  border: 0px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--slack-red);
+  color:white;
+}
+.member-list-item>button:hover{
+  background-color: var(--slack-blue);
+  color: white;
+  cursor: pointer;
+}

@@ -1,7 +1,17 @@
-import auth from "../auth/auth";
+import { useState } from "react";
+import AddMembersModal from "./add-members-modal";
 
 const ChannelThreadHeader = (props) => {
   const { channel } = props;
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
   return (
     <div className="thread-header">
       <div className="main-section">
@@ -12,9 +22,14 @@ const ChannelThreadHeader = (props) => {
         </p>
       </div>
       <div>
-        <button className="add-member-btn">
+        <button className="add-member-btn" onClick={openModal}>
           <i class="fa-solid fa-user-plus"></i>{" "}
         </button>
+        <AddMembersModal
+          channel={channel}
+          modalIsOpen={modalIsOpen}
+          closeModal={closeModal}
+        />
       </div>
     </div>
   );

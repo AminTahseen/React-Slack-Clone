@@ -10,8 +10,8 @@ import RightContent from "../components/right-content";
 const ChannelDetails = () => {
   const { channel } = useParams();
   const { subChannel, rightContent } = useContext(SlackContext);
-  const [channelSubChannels, setChannelSubChannels] = subChannel;
-  const [showRightContent, setShowRightContent] = rightContent;
+  const [channelSubChannels] = subChannel;
+  const [showRightContent] = rightContent;
   const subChannelClone = [...channelSubChannels];
   const channelDetails = subChannelClone.find(
     (element) => element.id === Number(channel)
