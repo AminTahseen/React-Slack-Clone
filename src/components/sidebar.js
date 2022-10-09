@@ -6,17 +6,27 @@ import { SlackContext } from "../context-api/slack-context-api";
 import SidebarLiActiveCheck from "./sidebar-li-active-check";
 import { mainMenu } from "../constants/constants";
 import SidebarActiveMain from "./sidebar-active-main";
+import SideBarDmSection from "./sidebar-dm-section";
+import SideBarChannelsSection from "./sidebar-channels-section";
+import { SubChannel } from "../models/sub-channel";
 
 const Sidebar = (props) => {
-  const { subChannel } = useContext(SlackContext);
+  const { subChannel, channelFuncs } = useContext(SlackContext);
+  const { addSubChannel } = channelFuncs;
   const [channelSubChannels, setChannelSubChannels] = subChannel;
   const [channelName, setChannelName] = useState(false);
+  const [subChannelName, setSubChannelName] = useState("");
 
+  const [addChannel, setAddChannel] = useState(false);
   const { active } = props;
   let channelsDiv = null;
   let mainMenuDiv = null;
   let channelNameDiv = null;
   let channelNameButtonDiv = null;
+  let addChannelDiv = null;
+  const handleSubChannelName = (e) => {
+    setSubChannelName(e.target.value);
+  };
   channelsDiv = channelSubChannels.map((element) => {
     return element.masterChannelId === auth.getMasterChannel().id ? (
       <SidebarLiActiveCheck
@@ -46,9 +56,58 @@ const Sidebar = (props) => {
     );
     channelNameButtonDiv = <i class="fa-solid fa-pen-to-square"></i>;
   }
+
+  const setAddChannelDiv = () => {
+    setAddChannel(!addChannel);
+  };
   const setChannelNameDiv = () => {
     setChannelName(!channelName);
   };
+  /*add new sub channel to sub channel list */
+  const addNewChannel = () => {
+    setAddChannelDiv();
+    if (subChannelName !== "") {
+      if (subChannelName.indexOf(" ") >= 0) {
+        alert("channel name cannot contain a white space !");
+      } else {
+        const id = (Math.floor(Math.random() * 100) + 1) * 2;
+        const userId = auth.getLoggedInUser().id;
+        const membersIds = [];
+        const masterChannelId = auth.getMasterChannel().id;
+        membersIds.push(auth.getLoggedInUser().id);
+        const subChannel = new SubChannel(
+          id,
+          subChannelName,
+          userId,
+          membersIds,
+          masterChannelId
+        );
+        addSubChannel(subChannel);
+      }
+      setSubChannelName("");
+    }
+  };
+
+  if (addChannel) {
+    addChannelDiv = (
+      <div className="add-channel-div">
+        <input
+          placeholder="Channel Name"
+          value={subChannelName}
+          onChange={handleSubChannelName}
+        />
+        <button onClick={addNewChannel}>
+          <i class="fas fa-check-square"></i>
+        </button>
+      </div>
+    );
+  } else {
+    addChannelDiv = (
+      <Link onClick={setAddChannelDiv}>
+        <i class="fa-solid fa-square-plus fa-lg"></i> &nbsp;Add Channel
+      </Link>
+    );
+  }
   return (
     <div class="sidebar">
       <div className="channel-header">
@@ -60,68 +119,13 @@ const Sidebar = (props) => {
       <div className="line-break" />
       <ul>{mainMenuDiv}</ul>
       <div className="line-break" />
-      <div className="channels-section">
-        <p>Channels</p>
-        <ul>
-          {active !== "general" && (
-            <li>
-              <Link
-                to={"/channel/general/" + auth.getMasterChannel().channelName}
-              >
-                <i class="fa-solid fa-hashtag"></i> &nbsp;General
-              </Link>
-            </li>
-          )}
-          {active === "general" && (
-            <li className="active-sidebar-item">
-              <Link
-                to={"/channel/general/" + auth.getMasterChannel().channelName}
-              >
-                <span className="active">
-                  <i class="fa-solid fa-hashtag"></i> &nbsp;General
-                </span>
-              </Link>
-            </li>
-          )}
-          {channelsDiv}
-
-          <li>
-            <Link>
-              <i class="fa-solid fa-square-plus fa-lg"></i> &nbsp;Add Channel
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <div className="dm-section">
-        <p>Direct Messages</p>
-        <ul>
-          <li className="li-dm">
-            <div class="icon-container">
-              <img
-                src="https://cdn2.iconfinder.com/data/icons/flatfaces-everyday-people-square/128/beard_male_man_face_avatar-512.png"
-                alt="not-found"
-              />
-              <div class="status-circle-active"></div>
-            </div>
-            &nbsp;
-            <Link>Amin Tahseen</Link>
-          </li>
-
-          <li className="li-dm">
-            <div class="icon-container">
-              <img src={avatar} alt="not-found" />
-              <div class="status-circle"></div>
-            </div>
-            &nbsp;
-            <Link>User Name</Link>
-          </li>
-          <li>
-            <Link>
-              <i class="fa-solid fa-square-plus fa-lg"></i> &nbsp;Add Teammate
-            </Link>
-          </li>
-        </ul>
-      </div>
+      <SideBarChannelsSection
+        auth={auth}
+        active={active}
+        channelsDiv={channelsDiv}
+        addChannelDiv={addChannelDiv}
+      />
+      <SideBarDmSection />
     </div>
   );
 };

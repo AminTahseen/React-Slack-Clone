@@ -12,7 +12,7 @@ export const SlackProvider = (props) => {
     new User(1, "John Doe", "abc.123", "ameen@gmail.com", true),
     new User(2, "Ahmed Ali", "efg.123", "ahmed@gmail.com", false),
     new User(3, "Kumar Sanu", "abcd.122", "kumar@gmail.com", false),
-    new User(4, "Ali Khan", "abcd.1223", "ali@gmail.com", false),
+    new User(4, "Hamza Khan", "abcd.1223", "hamza@gmail.com", false),
   ]);
   const [masterChannels, setMasterChannels] = useState([
     new MasterChannel(1, "MainChannel", 1, [1, 2, 3, 4]),
@@ -57,6 +57,29 @@ export const SlackProvider = (props) => {
   const hideShowRightContent = () => {
     setShowRightContent(!showRightContent);
   };
+  const addRemoveUserToChannel = (channelId, UserId) => {
+    const subChannel = channelSubChannels.find(
+      (element) => element.id === channelId
+    );
+    if (subChannel != null) {
+      if (subChannel.membersIds.includes(UserId)) {
+        const index = subChannel.membersIds.indexOf(UserId);
+        if (index > -1) {
+          // only splice array when item is found
+          subChannel.membersIds.splice(index, 1); // 2nd parameter means remove one item only
+        }
+      } else {
+        subChannel.membersIds.push(UserId);
+      }
+    } else {
+      alert("channel not found");
+    }
+  };
+  const addSubChannel = (subChannel) => {
+    const subChannelList = [...channelSubChannels];
+    subChannelList.push(subChannel);
+    setChannelSubChannels(subChannelList);
+  };
   const getData = () => "hello";
   return (
     <SlackContext.Provider
@@ -67,6 +90,7 @@ export const SlackProvider = (props) => {
         threads: [channelThreads, setChannelThreads],
         rightContent: [showRightContent, setShowRightContent],
         userFuncs: { findUserByID, getData, hideShowRightContent },
+        channelFuncs: { addRemoveUserToChannel, addSubChannel },
       }}
     >
       {props.children}

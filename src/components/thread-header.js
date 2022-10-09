@@ -11,7 +11,7 @@ const ThreadHeader = (props) => {
           {auth.getMasterChannel().membersIds.length} Users
         </p>
       </div>
-      <button>
+      <button className="add-member-btn">
         <i class="fa-solid fa-info"></i>
       </button>
     </div>

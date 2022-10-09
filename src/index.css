@@ -692,3 +692,26 @@ p {
   color: white;
   cursor: pointer;
 }
+/*sidebar add channel*/
+.add-channel-div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.add-channel-div>input{
+  width: 100%;
+  margin-right: 10px;
+  padding: 10px;
+  background-color: #581d5a;
+  color: white;
+  border: 0px;
+}
+.add-channel-div>button{
+  padding: 10px;
+  border: 0px;
+  border-radius: 10px;
+  background-color: var(--slack-red);
+  color: white;
+}

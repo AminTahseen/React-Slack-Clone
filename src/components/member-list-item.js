@@ -1,13 +1,22 @@
+import { useContext } from "react";
+import { SlackContext } from "../context-api/slack-context-api";
 const MemberListItem = (props) => {
   const { member, channel } = props;
+  const { channelFuncs } = useContext(SlackContext);
+  const { addRemoveUserToChannel } = channelFuncs;
   let memberExistDiv = null;
   let memberExistNameDiv = null;
+
+  const addRemoveMemberToChannel = () => {
+    addRemoveUserToChannel(channel.id, member.id);
+  };
+
   memberExistDiv = channel.membersIds.includes(member.id) ? (
-    <button className="remove">
+    <button className="remove" onClick={addRemoveMemberToChannel}>
       <i class="fa-solid fa-user-xmark"></i>
     </button>
   ) : (
-    <button>
+    <button onClick={addRemoveMemberToChannel}>
       <i class="fa-solid fa-user-plus"></i>
     </button>
   );
