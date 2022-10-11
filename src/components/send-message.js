@@ -1,22 +1,32 @@
-import React, { useState } from "react";
-import { EditorState } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import React, { useRef, useState } from "react";
+import { Editor } from "@tinymce/tinymce-react";
 
-const SendMessage = () => {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const handleChange = (data) => {
-    setEditorState(data);
+const SendMessage = (props) => {
+  const { sendMessageToChannel } = props;
+  const [content, setContent] = useState(null);
+  const handleChange = (value, editor) => {
+    // const { content } = value;
+    setContent(value);
+  };
+
+  const submitForm = () => {
+    sendMessageToChannel(content);
+    setContent(null);
   };
   return (
     <div className="thread-message">
       <Editor
-        editorState={editorState}
-        onEditorStateChange={handleChange}
-        wrapperClassName="editor-wrapper"
-        editorClassName="message-editor"
-        toolbarClassName="message-toolbar"
+        value={content}
+        // apiKey='your-api-key'
+        init={{
+          height: 160,
+          menubar: false,
+        }}
+        onEditorChange={handleChange}
       />
+      <button className="send-message" onClick={submitForm}>
+        send post
+      </button>
     </div>
   );
 };

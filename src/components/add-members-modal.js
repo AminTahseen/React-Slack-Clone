@@ -29,15 +29,15 @@ const AddMembersModal = (props) => {
   const [memberList, setMemberList] = useState([]);
   let membersDiv = null;
 
-  useEffect(() => {
-    const members = [];
-    const memberIds = [...auth.getMasterChannel().membersIds];
-    memberIds.forEach((id) => {
-      const user = findUserByID(id);
-      members.push(user);
-    });
-    setMemberList(members);
-  }, [findUserByID, memberList]);
+  // useEffect(() => {
+  //   const members = [];
+  //   const memberIds = [...auth.getMasterChannel().membersIds];
+  //   memberIds.forEach((id) => {
+  //     const user = findUserByID(id);
+  //     members.push(user);
+  //   });
+  //   setMemberList(members);
+  // }, [findUserByID, memberList]);
 
   if (memberList.length > 0) {
     membersDiv = memberList.map((item) => {
@@ -48,6 +48,7 @@ const AddMembersModal = (props) => {
   }
   return (
     <Modal
+      ariaHideApp={false}
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       style={customStyles}

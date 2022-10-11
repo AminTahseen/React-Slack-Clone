@@ -5,14 +5,14 @@ const ThreadMessage = (props) => {
   const { threads } = useContext(SlackContext);
   const [channelThreads, setChannelThreads] = threads;
   const { channel } = props;
-  const threadList = [...channelThreads];
+  const threadList = [...channelThreads.sort()];
   let div = null;
   if (channel === "thread") {
     div = <div>Message For threads</div>;
   } else if (channel === "general") {
     div = <div>Message For general</div>;
   } else {
-    div = threadList.map((element) => {
+    div = threadList.reverse().map((element) => {
       return element.channelId === channel.id ? (
         <ThreadMessageItem
           key={element.id}

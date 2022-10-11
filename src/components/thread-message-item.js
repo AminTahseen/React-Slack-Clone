@@ -1,20 +1,39 @@
+import Html2ReactParser from "html-to-react/lib/parser";
 import { useContext, useState, useEffect } from "react";
 import { SlackContext } from "../context-api/slack-context-api";
-import { User } from "../models/user";
+
 const ThreadMessageItem = (props) => {
   const { channel, thread } = props;
-  const { userFuncs } = useContext(SlackContext);
+  const { userFuncs, threadFuncs } = useContext(SlackContext);
   const { findUserByID, hideShowRightContent } = userFuncs;
+  const { updateReactionForThread } = threadFuncs;
   const [userName, setUserName] = useState("");
+  const htmlInput = thread.threadContent;
+  const htmlToReactParser = new Html2ReactParser();
+  const reactElement = htmlToReactParser.parse(htmlInput);
+  const [emojiArray, setEmojiArray] = useState([]);
 
   useEffect(() => {
     //  alert(JSON.stringify(thread));
     const user = findUserByID(1);
     setUserName(user.name);
+    setEmojiArray(thread.reactionsCount);
   }, [findUserByID]);
 
   const rightContent = () => {
     hideShowRightContent();
+  };
+  const updateThreadReaction = (emojiIndex) => {
+    const dummyArray = [...emojiArray];
+    if (emojiIndex === 0) {
+      dummyArray[0]++;
+    } else if (emojiIndex === 1) {
+      dummyArray[1]++;
+    } else {
+      dummyArray[2]++;
+    }
+    setEmojiArray(dummyArray);
+    updateReactionForThread(thread.id, emojiIndex);
   };
   return (
     <div>
@@ -36,26 +55,19 @@ const ThreadMessageItem = (props) => {
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
           </div>
-          <div className="thread-actual-post">
-            <p>
-              {thread.threadContent} Lorem Ipsum is simply dummy text of the
-              printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since the 1500s, when an
-              unknown printer took a galley of type and scrambled
-            </p>
-          </div>
+          <div className="thread-actual-post">{reactElement}</div>
           <div className="thread-reactions">
-            <button>
+            <button onClick={() => updateThreadReaction(0)}>
               <i class="fa-solid fa-thumbs-up"></i>&nbsp;
-              {thread.reactionsCount[0]}
+              {emojiArray[0]}
             </button>
-            <button>
+            <button onClick={() => updateThreadReaction(1)}>
               <i class="fa-solid fa-face-grin-wide"></i>&nbsp;
-              {thread.reactionsCount[1]}
+              {emojiArray[1]}
             </button>
-            <button>
+            <button onClick={() => updateThreadReaction(2)}>
               <i class="fa-solid fa-hands-clapping"></i>&nbsp;
-              {thread.reactionsCount[2]}
+              {emojiArray[2]}
             </button>
           </div>
           <a href="#" onClick={rightContent}>

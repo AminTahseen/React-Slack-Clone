@@ -45,7 +45,7 @@ export const SlackProvider = (props) => {
       3,
       1,
       1,
-      "Welcome to the channel ya'll !",
+      "Welcome to the channel ya'll 2!",
       "Fri, 03:22 AM",
       1,
       [1, 0, 0]
@@ -80,6 +80,25 @@ export const SlackProvider = (props) => {
     subChannelList.push(subChannel);
     setChannelSubChannels(subChannelList);
   };
+  const addThreadToChannel = (thread) => {
+    alert(JSON.stringify(thread));
+    const threadList = [...channelThreads];
+    threadList.push(thread);
+    setChannelThreads(threadList);
+  };
+  const updateReactionForThread = (threadId, emojiIndex) => {
+    const dummyArray = [...channelThreads];
+    if (emojiIndex === 0) {
+      const item = dummyArray.find((item) => item.id === threadId);
+      item.reactionsCount[0]++;
+    } else if (emojiIndex === 1) {
+      const item = dummyArray.find((item) => item.id === threadId);
+      item.reactionsCount[1]++;
+    } else if (emojiIndex === 2) {
+      const item = dummyArray.find((item) => item.id === threadId);
+      item.reactionsCount[2]++;
+    }
+  };
   const getData = () => "hello";
   return (
     <SlackContext.Provider
@@ -91,6 +110,7 @@ export const SlackProvider = (props) => {
         rightContent: [showRightContent, setShowRightContent],
         userFuncs: { findUserByID, getData, hideShowRightContent },
         channelFuncs: { addRemoveUserToChannel, addSubChannel },
+        threadFuncs: { addThreadToChannel, updateReactionForThread },
       }}
     >
       {props.children}

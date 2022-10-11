@@ -68,6 +68,27 @@ body {
   grid-area: 1 / 2 / 2 / 3;
   margin-left: 10px;
 }
+.header-account{
+  display: flex;
+  align-items: center;
+}
+.header-account:hover{
+  cursor: pointer;
+}
+.header-account>i{
+  margin-left: 10px;
+  color: var(--slack-yellow)
+}
+.header-account>img{
+  border-radius: 30px;
+}
+.logout{
+  border: 0px;
+  width: 100%;
+  padding:5px;
+  color: white;
+  background-color: var(--slack-red);
+}
 
 /*hero section*/
 .hero {
@@ -408,30 +429,20 @@ body {
 }
 .thread-message {
   padding: 10px;
-  align-items: flex-end;
   display: flex;
   flex-direction: column;
   border-right: 2px solid rgb(226, 225, 225);
 }
 
-/*wysiwyg editor*/
-.editor-wrapper {
-  border: 1px solid #c4cdd5;
-  height: 26vh;
-  overflow: auto;
-}
-.message-toolbar {
-  border-bottom: 1px solid #c4cdd5;
-  margin-bottom: 0px;
-  padding: 6px 5px;
-}
-.message-editor {
-  font-size: 16px;
-  padding: 0px 10px;
-}
-.rdw-option-wrapper {
-  min-width: 35px;
-  height: 30vh;
+.send-message{
+  border: 0px;
+  padding: 10px;
+  width: 30%;
+  background-color: var(--slack-purple);
+  color: white;
+  text-transform: uppercase;
+  align-self: end;
+  margin-top: 10px;
 }
 /*not found*/
 .not-found {
@@ -499,7 +510,7 @@ body {
   margin-left: 10px;
   color: gray;
 }
-.thread-actual-post > p {
+.thread-actual-post{
   margin-top: 0px;
   height: 100%;
   color: rgb(48, 46, 46);

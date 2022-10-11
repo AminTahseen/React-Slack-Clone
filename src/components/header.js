@@ -8,6 +8,7 @@ import "reactjs-popup/dist/index.css";
 import NotificationWindow from "./notification-window";
 
 const contentStyle = { width: 350 };
+const logoutStyle = { width: 100 };
 
 const Header = () => {
   const location = useLocation();
@@ -30,10 +31,32 @@ const Header = () => {
     activeHome = <span className="active">Home</span>;
     activeSign = <span>Join Slack</span>;
   } else if (auth.isAuthenticated()) {
+    /*
+    
+    */
     activeHome = (
-      <span className="Logout" onClick={logout}>
-        <i class="fa-solid fa-right-from-bracket"></i>
-      </span>
+      <Popup
+        className="my-popup-popup-content"
+        trigger={
+          <span className="header-account">
+            <img
+              src="https://cdn2.iconfinder.com/data/icons/flatfaces-everyday-people-square/128/beard_male_man_face_avatar-512.png"
+              alt="not-found"
+              width={30}
+            />
+            <i class="fa-solid fa-caret-down"></i>{" "}
+            <div class="status-circle-active"></div>
+          </span>
+        }
+        {...{
+          logoutStyle,
+        }}
+        position="bottom right"
+      >
+        <button className="logout" onClick={logout}>
+          Logout
+        </button>
+      </Popup>
     );
     activeNotification = (
       <Popup
@@ -71,9 +94,7 @@ const Header = () => {
           <li>
             <Link to="/signup">{activeSign}</Link>
           </li>
-          <li>
-            <Link to="/home">{activeHome}</Link>
-          </li>
+          <li>{activeHome}</li>
           <li>{activeNotification}</li>
         </ul>
       </div>
