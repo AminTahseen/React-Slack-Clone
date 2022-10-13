@@ -11,7 +11,7 @@ const SideBarChannelsSection = (props) => {
             <Link
               to={"/channel/general/" + auth.getMasterChannel().channelName}
             >
-              <i class="fa-solid fa-hashtag"></i> &nbsp;General
+              <i className="fa-solid fa-hashtag"></i> &nbsp;General
             </Link>
           </li>
         )}
@@ -21,7 +21,7 @@ const SideBarChannelsSection = (props) => {
               to={"/channel/general/" + auth.getMasterChannel().channelName}
             >
               <span className="active">
-                <i class="fa-solid fa-hashtag"></i> &nbsp;General
+                <i className="fa-solid fa-hashtag"></i> &nbsp;General
               </span>
             </Link>
           </li>

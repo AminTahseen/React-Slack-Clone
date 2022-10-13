@@ -1,6 +1,6 @@
-import Html2ReactParser from "html-to-react/lib/parser";
 import { useContext, useState, useEffect } from "react";
 import { SlackContext } from "../context-api/slack-context-api";
+import parse from "html-react-parser";
 
 const ThreadMessageItem = (props) => {
   const { channel, thread } = props;
@@ -9,8 +9,7 @@ const ThreadMessageItem = (props) => {
   const { updateReactionForThread } = threadFuncs;
   const [userName, setUserName] = useState("");
   const htmlInput = thread.threadContent;
-  const htmlToReactParser = new Html2ReactParser();
-  const reactElement = htmlToReactParser.parse(htmlInput);
+  const reactElement = parse(htmlInput);
   const [emojiArray, setEmojiArray] = useState([]);
 
   useEffect(() => {
@@ -18,7 +17,7 @@ const ThreadMessageItem = (props) => {
     const user = findUserByID(1);
     setUserName(user.name);
     setEmojiArray(thread.reactionsCount);
-  }, [findUserByID]);
+  }, [findUserByID, thread.reactionsCount]);
 
   const rightContent = () => {
     hideShowRightContent();
@@ -52,27 +51,27 @@ const ThreadMessageItem = (props) => {
               <p>{thread.dateTimePosted}</p>
             </div>
             <button>
-              <i class="fa-solid fa-ellipsis-vertical"></i>
+              <i className="fa-solid fa-ellipsis-vertical"></i>
             </button>
           </div>
           <div className="thread-actual-post">{reactElement}</div>
           <div className="thread-reactions">
             <button onClick={() => updateThreadReaction(0)}>
-              <i class="fa-solid fa-thumbs-up"></i>&nbsp;
+              <i className="fa-solid fa-thumbs-up"></i>&nbsp;
               {emojiArray[0]}
             </button>
             <button onClick={() => updateThreadReaction(1)}>
-              <i class="fa-solid fa-face-grin-wide"></i>&nbsp;
+              <i className="fa-solid fa-face-grin-wide"></i>&nbsp;
               {emojiArray[1]}
             </button>
             <button onClick={() => updateThreadReaction(2)}>
-              <i class="fa-solid fa-hands-clapping"></i>&nbsp;
+              <i className="fa-solid fa-hands-clapping"></i>&nbsp;
               {emojiArray[2]}
             </button>
           </div>
           <a href="#" onClick={rightContent}>
             <div className="thread-replies">
-              <i class="fa-solid fa-reply"></i>{" "}
+              <i className="fa-solid fa-reply"></i>{" "}
               <p>{thread.replyCount} Replies</p>
             </div>
           </a>

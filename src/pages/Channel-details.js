@@ -42,9 +42,9 @@ const ChannelDetails = () => {
   };
   if (showRightContent) {
     div = (
-      <div class="dashboard-3-columns">
+      <div className="dashboard-3-columns">
         <Sidebar active={channel} />
-        <div class="sidebar-content">
+        <div className="sidebar-content">
           <ChannelThreadHeader channel={channelDetails} />
           <ThreadContent channel={channelDetails} />
           <SendMessage sendMessageToChannel={sendMessageToChannel} />
@@ -56,9 +56,9 @@ const ChannelDetails = () => {
     );
   } else {
     div = (
-      <div class="dashboard">
+      <div className="dashboard">
         <Sidebar active={channel} />
-        <div class="sidebar-content">
+        <div className="sidebar-content">
           <ChannelThreadHeader channel={channelDetails} />
           <ThreadContent channel={channelDetails} />
           <SendMessage sendMessageToChannel={sendMessageToChannel} />

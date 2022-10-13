@@ -7,28 +7,28 @@ const SideBarDmSection = () => {
       <p>Direct Messages</p>
       <ul>
         <li className="li-dm">
-          <div class="icon-container">
+          <div className="icon-container">
             <img
               src="https://cdn2.iconfinder.com/data/icons/flatfaces-everyday-people-square/128/beard_male_man_face_avatar-512.png"
               alt="not-found"
             />
-            <div class="status-circle-active"></div>
+            <div className="status-circle-active"></div>
           </div>
           &nbsp;
           <Link>Amin Tahseen</Link>
         </li>
 
         <li className="li-dm">
-          <div class="icon-container">
+          <div className="icon-container">
             <img src={avatar} alt="not-found" />
-            <div class="status-circle"></div>
+            <div className="status-circle"></div>
           </div>
           &nbsp;
           <Link>User Name</Link>
         </li>
         <li>
           <Link>
-            <i class="fa-solid fa-square-plus fa-lg"></i> &nbsp;Add Teammate
+            <i className="fa-solid fa-square-plus fa-lg"></i> &nbsp;Add Teammate
           </Link>
         </li>
       </ul>

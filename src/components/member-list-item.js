@@ -13,11 +13,11 @@ const MemberListItem = (props) => {
 
   memberExistDiv = channel.membersIds.includes(member.id) ? (
     <button className="remove" onClick={addRemoveMemberToChannel}>
-      <i class="fa-solid fa-user-xmark"></i>
+      <i className="fa-solid fa-user-xmark"></i>
     </button>
   ) : (
     <button onClick={addRemoveMemberToChannel}>
-      <i class="fa-solid fa-user-plus"></i>
+      <i className="fa-solid fa-user-plus"></i>
     </button>
   );
   memberExistNameDiv = channel.membersIds.includes(member.id) ? (

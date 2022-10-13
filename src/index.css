@@ -23,15 +23,15 @@ body {
   background-color: var(--slack-purple);
   color: white;
   padding: 10px;
+  grid-template-areas: "logo items";
 }
 
 .nav > .logo {
-  grid-area: 1 / 1 / 2 / 2;
+  grid-area: logo
 }
 .nav > .items {
-  grid-area: 1 / 2 / 2 / 3;
+  grid-area:items
 }
-
 .nav > .items > ul > li {
   float: right;
   margin-right: 10px;
@@ -52,20 +52,22 @@ body {
 }
 .brand {
   display: grid;
-  grid-template-columns: 0fr 1fr;
+  grid-template-columns:1.2fr 5fr;
   grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  margin-top: 0px;
   align-items: center;
+  grid-template-areas: "img h2";
+  width: 30vh;
 }
-
+.brand>i{
+  display: none;
+  grid-area: menu;
+}
 .brand > img {
-  grid-area: 1 / 1 / 2 / 2;
+  grid-area: img
 }
 .brand > h2 {
   font-size: 20px;
-  grid-area: 1 / 2 / 2 / 3;
+  grid-area:h2;
   margin-left: 10px;
 }
 .header-account{
@@ -206,6 +208,7 @@ body {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   height: 100vh;
+  grid-template-areas: "sidebar sidebar-content";
 }
 .dashboard-3-columns {
   display: grid;
@@ -214,14 +217,15 @@ body {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   height: 100vh;
+  grid-template-areas: "sidebar sidebar-content right-content";
 }
 
 .sidebar {
   background-color: var(--slack-purple);
   border-top: 1px solid rgb(67, 67, 67);
-  grid-area: 1 / 1 / 2 / 2;
   max-height: 100vh;
   overflow: auto;
+  grid-area: sidebar;
 }
 .sidebar > h2 {
   color: white;
@@ -243,15 +247,46 @@ body {
 .sidebar > ul > li > a:hover {
   color: white;
 }
+/*sidebar-block*/
+.sidebar-block {
+  background-color: var(--slack-purple);
+  border-top: 1px solid rgb(67, 67, 67);
+  max-height: 100vh;
+  overflow: auto;
+  grid-area: sidebar;
+}
+.sidebar-block > h2 {
+  color: white;
+}
+.sidebar-block > ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar-block > ul > li {
+  padding-bottom: 20px;
+  font-size: 13px;
+}
+
+.sidebar-block > ul > li > a {
+  color: rgb(176, 176, 176);
+  text-decoration: none;
+  padding: 5px;
+}
+.sidebar-block > ul > li > a:hover {
+  color: white;
+}
+
+
 .sidebar-content {
-  grid-area: 1 / 2 / 2 / 3;
   height: 100vh;
+  grid-area: sidebar-content;
 }
 .sidebar-content-right-content {
   grid-area: 1 / 3 / 2 / 4;
   height: 60vh;
   border-left: 1px solid rgb(226, 225, 225);
   padding: 10px;
+  grid-area: right-content;
 }
 .channel-header {
   display: grid;
@@ -638,7 +673,7 @@ p {
 .add-members{
   display: flex;
   flex-direction: column;
-  width:600px;
+  width:40vh;
 }
 .add-members-header{
   display: flex;
@@ -725,4 +760,62 @@ p {
   border-radius: 10px;
   background-color: var(--slack-red);
   color: white;
+}
+@media only screen and (max-width: 700px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: 
+    "sidebar" 
+    "sidebar-content";
+  }
+
+  .sidebar-block{
+    min-height: 50vh;
+    display: block;
+    background-color: var(--slack-purple);
+  border-top: 1px solid rgb(67, 67, 67);
+  overflow: auto;
+  grid-area: sidebar;
+  }
+  .sidebar-block > h2 {
+    color: white;
+  }
+  .sidebar-block > ul {
+    list-style: none;
+    padding: 0;
+  }
+  .sidebar-block > ul > li {
+    padding-bottom: 20px;
+    font-size: 13px;
+  }
+  
+  .sidebar-block > ul > li > a {
+    color: rgb(176, 176, 176);
+    text-decoration: none;
+    padding: 5px;
+  }
+  .sidebar-block > ul > li > a:hover {
+    color: white;
+  }
+  .dashboard-3-columns {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: 
+    "sidebar" 
+    "sidebar-content" 
+    "right-content";
+  }
+  .brand {
+    display: grid;
+    grid-template-columns: 0.2fr 0.1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    grid-template-areas: "menu img h2";
+    width: 30vh;
+  }
+  .brand>i{
+    display: block;
+    grid-area: menu;
+  }
 }

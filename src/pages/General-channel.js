@@ -4,9 +4,9 @@ import ThreadHeader from "../components/thread-header";
 import ThreadContent from "../components/threads-contents";
 const GeneralChannel = () => {
   return (
-    <div class="dashboard">
+    <div className="dashboard">
       <Sidebar active={"general"} />
-      <div class="sidebar-content">
+      <div className="sidebar-content">
         <ThreadHeader channelName={"General"} />
         <ThreadContent channel={"general"} />
         <SendMessage />

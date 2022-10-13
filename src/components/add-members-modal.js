@@ -1,8 +1,5 @@
 import Modal from "react-modal";
 import MemberListItem from "./member-list-item";
-import auth from "../auth/auth";
-import { useContext, useEffect, useState } from "react";
-import { SlackContext } from "../context-api/slack-context-api";
 const customStyles = {
   overlay: {
     position: "fixed",
@@ -22,26 +19,17 @@ const customStyles = {
   },
 };
 const AddMembersModal = (props) => {
-  const { userFuncs } = useContext(SlackContext);
-  const { findUserByID } = userFuncs;
-  const { modalIsOpen, closeModal, channel } = props;
+  const { modalIsOpen, closeModal, channel, memberList } = props;
 
-  const [memberList, setMemberList] = useState([]);
   let membersDiv = null;
-
-  // useEffect(() => {
-  //   const members = [];
-  //   const memberIds = [...auth.getMasterChannel().membersIds];
-  //   memberIds.forEach((id) => {
-  //     const user = findUserByID(id);
-  //     members.push(user);
-  //   });
-  //   setMemberList(members);
-  // }, [findUserByID, memberList]);
 
   if (memberList.length > 0) {
     membersDiv = memberList.map((item) => {
-      return <MemberListItem channel={channel} member={item} />;
+      return (
+        <div key={item.id}>
+          <MemberListItem channel={channel} member={item} />;
+        </div>
+      );
     });
   } else {
     membersDiv = <p>No Members Found</p>;
@@ -59,7 +47,7 @@ const AddMembersModal = (props) => {
           <h3>Add Members</h3>
           <button onClick={closeModal}>
             {" "}
-            <i class="fa-solid fa-xmark"></i>
+            <i className="fa-solid fa-xmark"></i>
           </button>
         </div>
         <div className="add-members-content">{membersDiv}</div>

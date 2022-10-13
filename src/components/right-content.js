@@ -13,7 +13,7 @@ const RightContent = () => {
       <div className="right-content-header">
         <h4>Details</h4>
         <button onClick={closeRightContent}>
-          <i class="fa-solid fa-xmark"></i>
+          <i className="fa-solid fa-xmark"></i>
         </button>
       </div>
       <br />

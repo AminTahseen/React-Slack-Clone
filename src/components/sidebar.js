@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import avatar from "../images/avatar.png";
 import auth from "../auth/auth";
 import { useContext, useState } from "react";
 import { SlackContext } from "../context-api/slack-context-api";
@@ -11,11 +10,12 @@ import SideBarChannelsSection from "./sidebar-channels-section";
 import { SubChannel } from "../models/sub-channel";
 
 const Sidebar = (props) => {
-  const { subChannel, channelFuncs } = useContext(SlackContext);
+  const { subChannel, channelFuncs, sideBarContent } = useContext(SlackContext);
   const { addSubChannel } = channelFuncs;
   const [channelSubChannels, setChannelSubChannels] = subChannel;
   const [channelName, setChannelName] = useState(false);
   const [subChannelName, setSubChannelName] = useState("");
+  const [showSideBar] = sideBarContent;
 
   const [addChannel, setAddChannel] = useState(false);
   const { active } = props;
@@ -47,14 +47,14 @@ const Sidebar = (props) => {
         <input placeholder="Channel Name" />
       </div>
     );
-    channelNameButtonDiv = <i class="fa-solid fa-check"></i>;
+    channelNameButtonDiv = <i className="fa-solid fa-check"></i>;
   } else {
     channelNameDiv = (
       <Link to="/channel/channelName" className="active-h2">
         <h2>{auth.getMasterChannel().channelName}</h2>
       </Link>
     );
-    channelNameButtonDiv = <i class="fa-solid fa-pen-to-square"></i>;
+    channelNameButtonDiv = <i className="fa-solid fa-pen-to-square"></i>;
   }
 
   const setAddChannelDiv = () => {
@@ -97,19 +97,20 @@ const Sidebar = (props) => {
           onChange={handleSubChannelName}
         />
         <button onClick={addNewChannel}>
-          <i class="fas fa-check-square"></i>
+          <i className="fas fa-check-square"></i>
         </button>
       </div>
     );
   } else {
     addChannelDiv = (
       <Link onClick={setAddChannelDiv}>
-        <i class="fa-solid fa-square-plus fa-lg"></i> &nbsp;Add Channel
+        <i className="fa-solid fa-square-plus fa-lg"></i> &nbsp;Add Channel
       </Link>
     );
   }
+
   return (
-    <div class="sidebar">
+    <div className={showSideBar ? "sidebar" : "sidebar-block"}>
       <div className="channel-header">
         {channelNameDiv}
         <div className="button-div">

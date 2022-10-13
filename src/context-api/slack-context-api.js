@@ -8,6 +8,7 @@ export const SlackContext = createContext();
 
 export const SlackProvider = (props) => {
   const [showRightContent, setShowRightContent] = useState(false);
+  const [showSideBar, setShowSideBar] = useState(false);
   const [users, setUsers] = useState([
     new User(1, "John Doe", "abc.123", "ameen@gmail.com", true),
     new User(2, "Ahmed Ali", "efg.123", "ahmed@gmail.com", false),
@@ -56,6 +57,9 @@ export const SlackProvider = (props) => {
   };
   const hideShowRightContent = () => {
     setShowRightContent(!showRightContent);
+  };
+  const hideShowSideBar = () => {
+    setShowSideBar(!showSideBar);
   };
   const addRemoveUserToChannel = (channelId, UserId) => {
     const subChannel = channelSubChannels.find(
@@ -111,6 +115,8 @@ export const SlackProvider = (props) => {
         userFuncs: { findUserByID, getData, hideShowRightContent },
         channelFuncs: { addRemoveUserToChannel, addSubChannel },
         threadFuncs: { addThreadToChannel, updateReactionForThread },
+        sideBar: { hideShowSideBar },
+        sideBarContent: [showSideBar],
       }}
     >
       {props.children}

@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import NotificationWindow from "./notification-window";
+import { SlackContext } from "../context-api/slack-context-api";
+import { useContext } from "react";
 
 const contentStyle = { width: 350 };
 const logoutStyle = { width: 100 };
@@ -14,11 +16,17 @@ const Header = () => {
   const location = useLocation();
   const pathName = location.pathname;
   const navigate = useNavigate();
+  const { sideBar, sideBarContent } = useContext(SlackContext);
+  const { hideShowSideBar } = sideBar;
+  const [showSideBar] = sideBarContent;
 
   let activeSign = null;
   let activeHome = null;
   let activeNotification = null;
-
+  let menuDiv = null;
+  const hideShowSideBarFunc = () => {
+    hideShowSideBar();
+  };
   const logout = () => {
     auth.logout(() => {
       navigate("/signup");
@@ -31,9 +39,6 @@ const Header = () => {
     activeHome = <span className="active">Home</span>;
     activeSign = <span>Join Slack</span>;
   } else if (auth.isAuthenticated()) {
-    /*
-    
-    */
     activeHome = (
       <Popup
         className="my-popup-popup-content"
@@ -44,8 +49,8 @@ const Header = () => {
               alt="not-found"
               width={30}
             />
-            <i class="fa-solid fa-caret-down"></i>{" "}
-            <div class="status-circle-active"></div>
+            <i className="fa-solid fa-caret-down"></i>{" "}
+            <div className="status-circle-active"></div>
           </span>
         }
         {...{
@@ -63,11 +68,11 @@ const Header = () => {
         className="my-popup-popup-content"
         trigger={
           <span className="notification">
-            <i class="fa-solid fa-caret-down"></i>{" "}
             <span>
-              <i class="fa-solid fa-bell"></i>
+              <i className="fa-solid fa-bell"></i>
               <span className="notification-bell">2</span>
             </span>
+            <i className="fa-solid fa-caret-down"></i>{" "}
           </span>
         }
         {...{
@@ -79,22 +84,28 @@ const Header = () => {
       </Popup>
     );
   }
+  if (showSideBar) {
+    menuDiv = <i className="fa-solid fa-bars"></i>;
+  } else {
+    menuDiv = <i className="fas fa-times"></i>;
+  }
   return (
-    <div class="nav">
-      <div class="logo">
-        <div className="logo">
-          <div className="brand">
-            <img src={slackLogo} height={30} width={30} alt="logo" />
-            <h2>Slack 2.0</h2>
-          </div>
+    <div className="nav">
+      <div className="logo">
+        <div className="brand">
+          <i onClick={hideShowSideBarFunc}>{menuDiv}</i>
+          <img src={slackLogo} height={30} width={30} alt="logo" />
+          <h2>Slack 2.0</h2>
         </div>
       </div>
-      <div class="items">
+      <div className="items">
         <ul>
           <li>
             <Link to="/signup">{activeSign}</Link>
           </li>
-          <li>{activeHome}</li>
+          <li>
+            <Link to="/home">{activeHome}</Link>
+          </li>
           <li>{activeNotification}</li>
         </ul>
       </div>

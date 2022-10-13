@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
 const SendMessage = (props) => {

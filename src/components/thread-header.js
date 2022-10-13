@@ -7,12 +7,12 @@ const ThreadHeader = (props) => {
       <div className="main-section">
         <h3>#{channelName}</h3>
         <p>
-          <i class="fa-regular fa-user"></i>&nbsp;
+          <i className="fa-regular fa-user"></i>&nbsp;
           {auth.getMasterChannel().membersIds.length} Users
         </p>
       </div>
       <button className="add-member-btn">
-        <i class="fa-solid fa-info"></i>
+        <i className="fa-solid fa-info"></i>
       </button>
     </div>
   );

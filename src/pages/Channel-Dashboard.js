@@ -4,9 +4,9 @@ import auth from "../auth/auth";
 
 const ChannelDashboard = () => {
   return (
-    <div class="dashboard">
+    <div className="dashboard">
       <Sidebar active={"main"} />
-      <div class="sidebar-content">
+      <div className="sidebar-content">
         <ThreadHeader channelName={"Welcome"} />
         <div className="welcome">Welcome {auth.getLoggedInUser().name}</div>
       </div>
