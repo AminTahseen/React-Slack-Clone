@@ -34,9 +34,17 @@ const Header = () => {
   };
   if (pathName === "/signup") {
     activeSign = <span className="active">Join Slack</span>;
-    activeHome = <span>Home</span>;
+    activeHome = (
+      <Link to="/home">
+        <span>Home</span>
+      </Link>
+    );
   } else if (pathName === "/home" || pathName === "/") {
-    activeHome = <span className="active">Home</span>;
+    activeHome = (
+      <Link to="/home">
+        <span className="active">Home</span>
+      </Link>
+    );
     activeSign = <span>Join Slack</span>;
   } else if (auth.isAuthenticated()) {
     activeHome = (
@@ -45,12 +53,14 @@ const Header = () => {
         trigger={
           <span className="header-account">
             <img
-              src="https://cdn2.iconfinder.com/data/icons/flatfaces-everyday-people-square/128/beard_male_man_face_avatar-512.png"
+              src={
+                "https://ui-avatars.com/api/?name=" +
+                auth.getLoggedInUser().name
+              }
               alt="not-found"
               width={30}
             />
             <i className="fa-solid fa-caret-down"></i>{" "}
-            <div className="status-circle-active"></div>
           </span>
         }
         {...{
@@ -58,7 +68,11 @@ const Header = () => {
         }}
         position="bottom right"
       >
-        <button className="logout" onClick={logout}>
+        <div className="option-section">
+          <p>My Profile</p>
+          <p>My Settings</p>
+        </div>
+        <button className="logout" type="button" onClick={logout}>
           Logout
         </button>
       </Popup>
@@ -103,9 +117,7 @@ const Header = () => {
           <li>
             <Link to="/signup">{activeSign}</Link>
           </li>
-          <li>
-            <Link to="/home">{activeHome}</Link>
-          </li>
+          <li>{activeHome}</li>
           <li>{activeNotification}</li>
         </ul>
       </div>

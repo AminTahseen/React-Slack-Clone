@@ -1,5 +1,6 @@
 import { React, createContext, useState } from "react";
 import { MasterChannel } from "../models/master-channel";
+import { Message, MessageContent } from "../models/message";
 import { SubChannel } from "../models/sub-channel";
 import { Thread } from "../models/thread";
 import { User } from "../models/user";
@@ -51,6 +52,16 @@ export const SlackProvider = (props) => {
       1,
       [1, 0, 0]
     ),
+  ]);
+  const [directMessages, setDirectMessages] = useState([
+    new Message(101, 2, 1, [
+      new MessageContent(101, 2, 1, "Hello", "Fri, 03:22 AM"),
+      new MessageContent(102, 2, 1, "How are you ?", "Fri, 03:22 AM"),
+    ]),
+    new Message(102, 3, 1, [
+      new MessageContent(103, 3, 1, "Hi !", "Fri, 03:22 AM"),
+      new MessageContent(104, 1, 3, "Hey, How are you ?", "Fri, 03:22 AM"),
+    ]),
   ]);
   const findUserByID = (id) => {
     return users.find((element) => element.id === id);
@@ -112,11 +123,16 @@ export const SlackProvider = (props) => {
         subChannel: [channelSubChannels, setChannelSubChannels],
         threads: [channelThreads, setChannelThreads],
         rightContent: [showRightContent, setShowRightContent],
-        userFuncs: { findUserByID, getData, hideShowRightContent },
+        userFuncs: {
+          findUserByID,
+          getData,
+          hideShowRightContent,
+        },
         channelFuncs: { addRemoveUserToChannel, addSubChannel },
         threadFuncs: { addThreadToChannel, updateReactionForThread },
         sideBar: { hideShowSideBar },
         sideBarContent: [showSideBar],
+        messages: [directMessages],
       }}
     >
       {props.children}

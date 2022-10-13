@@ -9,6 +9,8 @@ import Threads from "./pages/Threads";
 import NotFound from "./pages/Not-Found";
 import ProtectedRoute from "./auth/protected-route";
 import GeneralChannel from "./pages/General-channel";
+import DirectMessages from "./pages/Direct-Messages";
+import DirectMessagesConvo from "./pages/Direct-Messages-Convo";
 
 const App = () => {
   return (
@@ -23,7 +25,7 @@ const App = () => {
           <Route exact path="/channel/:name" element={<ProtectedRoute />}>
             <Route path="/channel/:name" element={<ChannelDashboard />} />
           </Route>
-
+          {/* main channels routes */}
           <Route
             exact
             path="/channel/thread/:name"
@@ -31,6 +33,11 @@ const App = () => {
           >
             <Route path="/channel/thread/:name" element={<Threads />} />
           </Route>
+
+          <Route exact path="/channel/dm/:name" element={<ProtectedRoute />}>
+            <Route path="/channel/dm/:name" element={<DirectMessages />} />
+          </Route>
+          {/* main channels routes end */}
 
           <Route
             exact
@@ -52,6 +59,19 @@ const App = () => {
               element={<GeneralChannel />}
             />
           </Route>
+
+          {/* dm section */}
+          <Route
+            exact
+            path="/dm/messages/:toId/:fromId/:forDm"
+            element={<ProtectedRoute />}
+          >
+            <Route
+              path="/dm/messages/:toId/:fromId/:forDm"
+              element={<DirectMessagesConvo />}
+            />
+          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

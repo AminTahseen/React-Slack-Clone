@@ -7,7 +7,7 @@ export const mainMenu = [
   },
   {
     id: 22,
-    title: "Direct Messages",
+    title: "All DMs",
     path: "/dm/",
     icon: "fa-solid fa-comments",
   },

@@ -18,7 +18,7 @@ const HeroSection = () => {
         </Link>
 
         <button className="btn-text">
-          Take The Tutorial <i class="fa-solid fa-arrow-right"></i>
+          Take The Tutorial <i className="fa-solid fa-arrow-right"></i>
         </button>
       </div>
       <img src={Logo} height={300} className="hero-image" alt="hero" />

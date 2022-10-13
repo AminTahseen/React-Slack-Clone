@@ -79,10 +79,15 @@ body {
 }
 .header-account>i{
   margin-left: 10px;
-  color: var(--slack-yellow)
+  color: gainsboro;
 }
 .header-account>img{
   border-radius: 30px;
+}
+.option-section{
+}
+.option-section >p{
+  padding: 10px;
 }
 .logout{
   border: 0px;
@@ -383,8 +388,13 @@ body {
 .li-dm > i > img {
   border-radius: 5px;
 }
+.li-dm-active {
+  background-color: var(--slack-blue);
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
 .icon-container {
-  height: 20px;
+  height: 25px;
   position: relative;
 }
 
@@ -394,8 +404,8 @@ body {
 }
 
 .status-circle {
-  width: 3px;
-  height: 3px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background-color: grey;
   border: 1px solid white;
@@ -404,8 +414,8 @@ body {
   position: absolute;
 }
 .status-circle-active {
-  width: 3px;
-  height: 3px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background-color: var(--slack-green);
   border: 1px solid white;
@@ -413,11 +423,7 @@ body {
   right: 0;
   position: absolute;
 }
-.online {
-  width: 5px;
-  height: 5px;
-  background-color: #2eb67d;
-}
+
 .active-sidebar-item {
   color: white;
   background-color: var(--slack-blue);
@@ -509,15 +515,16 @@ body {
 /*thread main post*/
 .thread-message-post {
   display: grid;
-  grid-template-columns: 0.2fr 3fr;
+  grid-template-columns: 0.15fr 3fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   margin-top: 10px;
+  grid-template-areas: "thread-img thread-post";
 }
 
 .thread-img {
-  grid-area: 1 / 1 / 2 / 2;
+  grid-area: thread-img;
   border-radius: 10px;
   margin-top: 5px;
 }
@@ -525,6 +532,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
+  grid-area: thread-post;
 }
 .thread-post > .user-details > .user-details-values {
   display: flex;
@@ -552,7 +560,13 @@ body {
   font-size: 16px;
   width: 90%;
 }
-
+.thread-post>button{
+  background-color: white;
+  border: 0px;
+}
+.thread-post>button:hover{
+  cursor: pointer;
+}
 .thread-reactions {
   position: relative;
   display: flex;
@@ -577,6 +591,8 @@ a {
   margin-top: 10px;
   display: flex;
   width: 90%;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border: 1px solid rgb(228, 225, 225);
   padding-left: 10px;
   align-items: center;
@@ -761,6 +777,130 @@ p {
   background-color: var(--slack-red);
   color: white;
 }
+/*dm section*/
+.dm-searchbar{
+  border: 0px;
+  padding: 10px;
+ background-color: gainsboro;
+}
+.dm-header {
+  border-bottom: 1px solid rgb(226, 225, 225);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 0.5fr;
+  grid-template-areas: 
+  "dm-header" 
+  "dm-input";
+}
+.dm-header-details{
+  grid-area: dm-header;
+  padding-left:10px;
+  background-color: rgb(248, 248, 248);
+  border-bottom: 1px solid gray;
+}
+.dm-convo-header-details{
+  padding:20px;
+  background-color: rgb(248, 248, 248);
+  display: flex;
+  align-items: center;
+}
+.icon-container-dm-convo {
+  height: 50px;
+  position: relative;
+}
+.icon-container-dm-convo >img{
+  border-radius: 10px;
+  height:50px;
+  position: relative;
+}
+.dm-convo-header-details >h3{
+  margin-left: 10px;
+}
+.dm-header-input{
+  grid-area: dm-input;
+ 
+}
+.dm-header-input>span{
+  display:flex;
+  flex-direction:row;
+}
+.dm-header-input>span>input{
+  flex: 1;
+  background-color: white;
+  padding:20px;
+  border: 0px;
+  border-radius: 0px;
+}
+.dm-content {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-top: 20px;
+  height:80%;
+  overflow: auto;
+  background-color: rgb(248, 248, 248);
+}
+.dm-today{
+  margin-left: 10px;
+}
+.dm-messages-holder{
+  background-color: white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 10px;
+  padding: 5px;
+  border: 1px solid gray;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.dm-message-item{
+  display: grid;
+  grid-template-columns: 0.06fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+  "message-img message-content";
+  background-color: white;
+  padding: 10px;
+border-bottom: 1px solid gray;
+}
+.dm-messages-holder :last-child.dm-message-item{
+  border: 0px;
+}
+
+.dm-message-item-img{
+  grid-area: message-img;
+}
+.dm-message-item-content{
+  grid-area: message-content;
+
+}
+.dm-message-item-content-details{
+  display: flex;
+  align-items: center;
+  
+}
+.dm-message-item-content >a >.dm-message-item-content-details>.userName{
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  
+}
+.dm-message-item-content>a>.dm-message-item-content-details>.msg-date{
+  margin-left: 10px;
+  color: grey;
+}
+.dm-message-item-content-message{
+  color: black;
+}
+/*dm message convo*/
+.dm-convo-content {
+  padding: 10px;
+  height: 56vh;
+  max-height: 56vh;
+  overflow: auto;
+}
 @media only screen and (max-width: 700px) {
   .dashboard {
     grid-template-columns: 1fr;
@@ -817,5 +957,16 @@ p {
   .brand>i{
     display: block;
     grid-area: menu;
+  }
+  .dm-message-item{
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "message-img message-content";
+   
+    background-color: white;
+    padding: 10px;
+  border-bottom: 1px solid gray;
   }
 }

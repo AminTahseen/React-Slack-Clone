@@ -12,7 +12,7 @@ import { SubChannel } from "../models/sub-channel";
 const Sidebar = (props) => {
   const { subChannel, channelFuncs, sideBarContent } = useContext(SlackContext);
   const { addSubChannel } = channelFuncs;
-  const [channelSubChannels, setChannelSubChannels] = subChannel;
+  const [channelSubChannels] = subChannel;
   const [channelName, setChannelName] = useState(false);
   const [subChannelName, setSubChannelName] = useState("");
   const [showSideBar] = sideBarContent;
@@ -126,7 +126,7 @@ const Sidebar = (props) => {
         channelsDiv={channelsDiv}
         addChannelDiv={addChannelDiv}
       />
-      <SideBarDmSection />
+      <SideBarDmSection active={active} />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { SlackContext } from "../context-api/slack-context-api";
 import parse from "html-react-parser";
 
 const ThreadMessageItem = (props) => {
-  const { channel, thread } = props;
+  const { thread } = props;
   const { userFuncs, threadFuncs } = useContext(SlackContext);
   const { findUserByID, hideShowRightContent } = userFuncs;
   const { updateReactionForThread } = threadFuncs;
@@ -39,7 +39,7 @@ const ThreadMessageItem = (props) => {
       <div className="thread-message-post">
         <img
           className="thread-img"
-          src="https://cdn2.iconfinder.com/data/icons/flatfaces-everyday-people-square/128/beard_male_man_face_avatar-512.png"
+          src={"https://ui-avatars.com/api/?name=" + userName}
           alt="not-found"
           width={50}
           height={50}
@@ -69,12 +69,12 @@ const ThreadMessageItem = (props) => {
               {emojiArray[2]}
             </button>
           </div>
-          <a href="#" onClick={rightContent}>
+          <button onClick={rightContent}>
             <div className="thread-replies">
               <i className="fa-solid fa-reply"></i>{" "}
               <p>{thread.replyCount} Replies</p>
             </div>
-          </a>
+          </button>
         </div>
       </div>
     </div>
