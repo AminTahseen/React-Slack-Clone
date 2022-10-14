@@ -5,6 +5,7 @@ import DirectMessageConvoHeader from "../components/dm-convo-header";
 import SendDirectMessage from "../components/send-dm-message";
 import Sidebar from "../components/sidebar";
 import { SlackContext } from "../context-api/slack-context-api";
+import auth from "../auth/auth";
 
 const DirectMessagesConvo = () => {
   const { toId, fromId, forDm } = useParams();
@@ -13,14 +14,42 @@ const DirectMessagesConvo = () => {
   let sideBarDiv = null;
   let headerDiv = null;
   if (forDm === "allDm") {
-    sideBarDiv = <Sidebar active={findUserByID(Number(toId)).name} />;
+    sideBarDiv = (
+      <Sidebar
+        active={
+          Number(toId) !== auth.getLoggedInUser().id
+            ? findUserByID(Number(toId)).name
+            : findUserByID(Number(fromId)).name
+        }
+      />
+    );
     headerDiv = (
-      <DirectMessageConvoHeader heading={findUserByID(Number(toId)).name} />
+      <DirectMessageConvoHeader
+        heading={
+          Number(toId) !== auth.getLoggedInUser().id
+            ? findUserByID(Number(toId)).name
+            : findUserByID(Number(fromId)).name
+        }
+      />
     );
   } else {
-    sideBarDiv = <Sidebar active={findUserByID(Number(fromId)).name} />;
+    sideBarDiv = (
+      <Sidebar
+        active={
+          Number(fromId) !== auth.getLoggedInUser().id
+            ? findUserByID(Number(fromId)).name
+            : findUserByID(Number(toId)).name
+        }
+      />
+    );
     headerDiv = (
-      <DirectMessageConvoHeader heading={findUserByID(Number(fromId)).name} />
+      <DirectMessageConvoHeader
+        heading={
+          Number(fromId) !== auth.getLoggedInUser().id
+            ? findUserByID(Number(fromId)).name
+            : findUserByID(Number(toId)).name
+        }
+      />
     );
   }
   return (

@@ -21,9 +21,9 @@ const DMSectionMessageItem = (props) => {
         <Link
           to={
             "/dm/messages/" +
-            mainMessage.message_to_user_id +
-            "/" +
             mainMessage.message_from_user_id +
+            "/" +
+            mainMessage.message_to_user_id +
             "/allDm"
           }
         >

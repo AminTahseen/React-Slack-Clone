@@ -55,12 +55,16 @@ export const SlackProvider = (props) => {
   ]);
   const [directMessages, setDirectMessages] = useState([
     new Message(101, 2, 1, [
-      new MessageContent(101, 2, 1, "Hello", "Fri, 03:22 AM"),
-      new MessageContent(102, 2, 1, "How are you ?", "Fri, 03:22 AM"),
+      new MessageContent(1011, 2, 1, "Hello, 1", "Fri, 03:22 AM"),
+      new MessageContent(1012, 1, 2, "How are you ? 1", "Fri, 03:22 AM"),
     ]),
-    new Message(102, 3, 1, [
-      new MessageContent(103, 3, 1, "Hi !", "Fri, 03:22 AM"),
-      new MessageContent(104, 1, 3, "Hey, How are you ?", "Fri, 03:22 AM"),
+    new Message(102, 1, 3, [
+      new MessageContent(1021, 3, 1, "Hello, 2", "Fri, 03:22 AM"),
+      new MessageContent(1022, 1, 3, "How are you ? 2", "Fri, 03:22 AM"),
+    ]),
+    new Message(103, 2, 3, [
+      new MessageContent(1031, 3, 2, "Hello, 3", "Fri, 03:22 AM"),
+      new MessageContent(1032, 2, 3, "Hey, How are you ? 3", "Fri, 03:22 AM"),
     ]),
   ]);
   const findUserByID = (id) => {

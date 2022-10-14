@@ -1,4 +1,13 @@
 /*
+messages logic : 
+const filter1=get messages where ("message_to_userId" === 1)
+if (filter1!==null) {
+   return filter1;
+} else {
+   const filter2=get messages where ("message_from_userId" === 1)
+   return filter2;
+}
+Data : 
 {
    "Message":{
       "id":1,
