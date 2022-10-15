@@ -15,9 +15,8 @@ const DirectMessageConvoContent = (props) => {
     );
   });
   if (filterResult.length !== 0) {
-    // alert("all dm : " + JSON.stringify(filterResult[0]));
     conversationDiv = filterResult[0].message.map((element) => {
-      return <DirectMessageConvoItem message={element} />;
+      return <DirectMessageConvoItem key={element.id} message={element} />;
     });
   } else {
     const filterResult2 = directMessages.filter((x) => {
@@ -28,12 +27,11 @@ const DirectMessageConvoContent = (props) => {
     });
     if (filterResult2.length !== 0) {
       conversationDiv = filterResult2[0].message.map((element) => {
-        return <DirectMessageConvoItem message={element} />;
+        return <DirectMessageConvoItem key={element.id} message={element} />;
       });
     } else {
       conversationDiv = <p>No Conversation Yet</p>;
     }
-    // alert(JSON.stringify(filterResult2[0]));
   }
   return <div className="dm-convo-content">{conversationDiv}</div>;
 };

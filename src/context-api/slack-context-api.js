@@ -118,6 +118,44 @@ export const SlackProvider = (props) => {
       item.reactionsCount[2]++;
     }
   };
+  const sendMessageToUser = (messageContent) => {
+    //dm item = to : 1, from : 3
+    const toId = Number(messageContent.to_user_id); //3
+    const fromId = Number(messageContent.from_user_id); //1
+    // alert("to : " + toId + " from : " + fromId);
+    //  alert(typeof toId + " " + typeof fromId);
+    const copyMessages = [...directMessages];
+    let findDirectMessage = copyMessages.filter((element) => {
+      return (
+        (element.message_to_user_id === fromId &&
+          element.message_from_user_id === toId) ||
+        (element.message_to_user_id === toId &&
+          element.message_from_user_id === fromId)
+      );
+    });
+    var index = copyMessages.indexOf(findDirectMessage[0]);
+    //  alert(findDirectMessage.length);
+    if (findDirectMessage.length === 1) {
+      //  alert("if > chat exists");
+
+      findDirectMessage[0].message.push(messageContent);
+      //  alert("new item :" + JSON.stringify(findDirectMessage[0]));
+      copyMessages[index] = findDirectMessage[0];
+      //  alert("new array :" + JSON.stringify(directMessages));
+    } else {
+      alert("create new message object");
+      const messageContentArray = [];
+      messageContentArray.push(messageContent);
+      const message = new Message(
+        messageContent.id,
+        toId,
+        fromId,
+        messageContentArray
+      );
+      copyMessages.push(message);
+    }
+    setDirectMessages(copyMessages);
+  };
   const getData = () => "hello";
   return (
     <SlackContext.Provider
@@ -137,6 +175,7 @@ export const SlackProvider = (props) => {
         sideBar: { hideShowSideBar },
         sideBarContent: [showSideBar],
         messages: [directMessages],
+        messagesFuncs: { sendMessageToUser },
       }}
     >
       {props.children}

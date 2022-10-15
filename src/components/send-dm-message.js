@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
 const SendDirectMessage = (props) => {
+  const { sendDmMessage } = props;
   const [content, setContent] = useState(null);
   const handleChange = (value, editor) => {
     // const { content } = value;
@@ -10,6 +11,7 @@ const SendDirectMessage = (props) => {
 
   const submitForm = () => {
     setContent(null);
+    sendDmMessage(content);
   };
   return (
     <div className="thread-message">
