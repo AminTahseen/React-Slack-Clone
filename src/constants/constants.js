@@ -14,7 +14,7 @@ export const mainMenu = [
   {
     id: 33,
     title: "Mentions & Replies",
-    path: "/mentions/",
+    path: "/mentions-replies/",
     icon: "fa-solid fa-at",
   },
   {

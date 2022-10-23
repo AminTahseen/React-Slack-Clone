@@ -1,6 +1,6 @@
 import React from "react";
 import DMSectionMessageItem from "./dm-section-msg-item";
-import DMSectionTodayMessages from "./dm-section-today";
+// import DMSectionTodayMessages from "./dm-section-today";
 import { useContext } from "react";
 import { SlackContext } from "../context-api/slack-context-api";
 import auth from "../auth/auth";
@@ -27,7 +27,6 @@ if (filter1!==null) {
       (element) => element.message_from_user_id === auth.getLoggedInUser().id
     );
     const directMessages2 = filter1.concat(filter2);
-    console.table(directMessages2);
     if (directMessages2.length !== 0) {
       messageDiv = directMessages2.map((element) => {
         return (

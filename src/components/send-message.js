@@ -5,7 +5,6 @@ const SendMessage = (props) => {
   const { sendMessageToChannel } = props;
   const [content, setContent] = useState(null);
   const handleChange = (value, editor) => {
-    // const { content } = value;
     setContent(value);
   };
 
@@ -24,6 +23,7 @@ const SendMessage = (props) => {
         }}
         onEditorChange={handleChange}
       />
+
       <button className="send-message" onClick={submitForm}>
         send post
       </button>

@@ -13,7 +13,7 @@ export const SlackProvider = (props) => {
   const [users, setUsers] = useState([
     new User(1, "John Doe", "abc.123", "ameen@gmail.com", true),
     new User(2, "Ahmed Ali", "efg.123", "ahmed@gmail.com", false),
-    new User(3, "Kumar Sanu", "abcd.122", "kumar@gmail.com", false),
+    new User(3, "Alex Mitchells", "abcd.122", "kumar@gmail.com", false),
     new User(4, "Hamza Khan", "abcd.1223", "hamza@gmail.com", false),
   ]);
   const [masterChannels, setMasterChannels] = useState([

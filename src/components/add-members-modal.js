@@ -27,7 +27,7 @@ const AddMembersModal = (props) => {
     membersDiv = memberList.map((item) => {
       return (
         <div key={item.id}>
-          <MemberListItem channel={channel} member={item} />;
+          <MemberListItem channel={channel} member={item} />
         </div>
       );
     });

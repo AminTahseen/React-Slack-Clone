@@ -11,6 +11,8 @@ import ProtectedRoute from "./auth/protected-route";
 import GeneralChannel from "./pages/General-channel";
 import DirectMessages from "./pages/Direct-Messages";
 import DirectMessagesConvo from "./pages/Direct-Messages-Convo";
+import MentionsReplies from "./pages/Mentions-Replies";
+import Files from "./pages/Files";
 
 const App = () => {
   return (
@@ -36,6 +38,20 @@ const App = () => {
 
           <Route exact path="/channel/dm/:name" element={<ProtectedRoute />}>
             <Route path="/channel/dm/:name" element={<DirectMessages />} />
+          </Route>
+          <Route
+            exact
+            path="/channel/mentions-replies/:name"
+            element={<ProtectedRoute />}
+          >
+            <Route
+              path="/channel/mentions-replies/:name"
+              element={<MentionsReplies />}
+            />
+          </Route>
+
+          <Route exact path="/channel/files/:name" element={<ProtectedRoute />}>
+            <Route path="/channel/files/:name" element={<Files />} />
           </Route>
           {/* main channels routes end */}
 
