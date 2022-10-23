@@ -15,7 +15,7 @@ if (filter1!==null) {
    return filter1;
 } else {
    const filter2=get messages where ("message_from_userId" === 1)
-   return adsdsd
+   abc code
 }
 */
   const filter1 = directMessages.filter(
